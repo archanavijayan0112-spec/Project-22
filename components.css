@@ -1,0 +1,43 @@
+.intensity-gauge {
+  width: 100%;
+}
+
+.intensity-gauge__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.intensity-gauge__value {
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.intensity-gauge__track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--intensity-clean) 0%,
+    var(--intensity-moderate) 40%,
+    var(--intensity-high) 70%,
+    var(--intensity-severe) 100%
+  );
+}
+
+.intensity-gauge__marker {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-base);
+  border: 3px solid var(--text-primary);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 3px rgba(14, 26, 26, 0.6);
+  transition: left 0.4s ease;
+}

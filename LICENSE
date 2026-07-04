@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "unit": "gCO2eq/kWh",
+    "note": "Approximate average grid carbon intensity by region, derived from publicly available grid-mix methodology (similar in spirit to the Cloud Carbon Footprint project's coefficients). Values are illustrative averages, not real-time measurements, and should be refreshed from a live provider (e.g. Electricity Maps) for production use."
+  },
+  "aws": {
+    "us-east-1": 379.1,
+    "us-east-2": 452.8,
+    "us-west-1": 227.1,
+    "us-west-2": 136.5,
+    "ca-central-1": 130.2,
+    "eu-west-1": 316.2,
+    "eu-west-2": 228.7,
+    "eu-west-3": 51.1,
+    "eu-central-1": 338.0,
+    "eu-north-1": 8.8,
+    "ap-south-1": 632.5,
+    "ap-southeast-1": 408.0,
+    "ap-southeast-2": 634.9,
+    "ap-northeast-1": 474.8,
+    "ap-northeast-2": 415.3,
+    "sa-east-1": 61.7
+  },
+  "azure": {
+    "eastus": 379.1,
+    "eastus2": 379.1,
+    "westus": 227.1,
+    "westus2": 136.5,
+    "canadacentral": 130.2,
+    "westeurope": 273.5,
+    "northeurope": 297.7,
+    "francecentral": 51.1,
+    "swedencentral": 8.8,
+    "uksouth": 228.7,
+    "southeastasia": 408.0,
+    "australiaeast": 634.9,
+    "japaneast": 474.8,
+    "koreacentral": 415.3,
+    "brazilsouth": 61.7
+  },
+  "gcp": {
+    "us-east1": 379.1,
+    "us-east4": 379.1,
+    "us-west1": 136.5,
+    "us-central1": 452.8,
+    "northamerica-northeast1": 27.5,
+    "europe-west1": 165.6,
+    "europe-west2": 228.7,
+    "europe-west3": 338.0,
+    "europe-west4": 273.5,
+    "europe-north1": 8.8,
+    "asia-south1": 632.5,
+    "asia-southeast1": 408.0,
+    "australia-southeast1": 634.9,
+    "asia-northeast1": 474.8,
+    "southamerica-east1": 61.7
+  }
+}

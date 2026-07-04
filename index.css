@@ -1,0 +1,76 @@
+import React, { useEffect, useState } from "react";
+import { api } from "../api/client";
+
+const CATEGORY_ICONS = {
+  Rightsizing: "⇲",
+  "Carbon-aware scheduling": "◷",
+  "Storage tiering": "▤",
+  "Network optimization": "⇄",
+};
+
+export default function Recommendations({ architecture }) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    api
+      .getRecommendations(architecture.id)
+      .then((res) => !cancelled && setData(res))
+      .catch((err) => !cancelled && setError(err.message))
+      .finally(() => !cancelled && setLoading(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [architecture.id]);
+
+  if (loading) return <div className="panel">Generating recommendations…</div>;
+  if (error) return <div className="panel banner banner--error">{error}</div>;
+  if (!data) return null;
+
+  const totalSavings = data.recommendations.reduce((sum, r) => sum + r.estimated_co2_savings_kg, 0);
+
+  return (
+    <div className="panel">
+      <div className="panel__header">
+        <div>
+          <h2>Energy-efficient deployment recommendations</h2>
+          <p>Rule-based suggestions derived from utilization, workload type, and storage patterns.</p>
+        </div>
+      </div>
+
+      {data.recommendations.length === 0 ? (
+        <div className="banner banner--success">
+          No inefficiencies detected — this architecture already looks well-tuned.
+        </div>
+      ) : (
+        <>
+          <div className="banner banner--info">
+            Applying all recommendations below could save an estimated{" "}
+            <strong className="mono">{totalSavings.toFixed(1)} kg CO₂e/month</strong>.
+          </div>
+          <div className="rec-list">
+            {data.recommendations.map((r, i) => (
+              <div className="rec-card" key={i}>
+                <span className="rec-card__icon" aria-hidden="true">
+                  {CATEGORY_ICONS[r.category] || "●"}
+                </span>
+                <div className="rec-card__body">
+                  <div className="rec-card__top">
+                    <span className="rec-card__category">{r.category}</span>
+                    <span className="badge badge--positive mono">
+                      −{r.estimated_co2_savings_kg.toFixed(2)} kg
+                    </span>
+                  </div>
+                  <p>{r.message}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

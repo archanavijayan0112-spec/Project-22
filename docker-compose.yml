@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "compute_unit": "watts per vCPU at min/max utilization",
+    "storage_unit": "watts per GB-month",
+    "network_unit": "kWh per GB transferred",
+    "note": "Coefficients approximate published methodology from the Cloud Carbon Footprint open-source project. min = idle load, max = 100% utilization; actual draw is linearly interpolated by assumed average utilization."
+  },
+  "compute_families": {
+    "general_purpose": { "min_watts_per_vcpu": 0.74, "max_watts_per_vcpu": 3.5 },
+    "compute_optimized": { "min_watts_per_vcpu": 0.85, "max_watts_per_vcpu": 4.1 },
+    "memory_optimized": { "min_watts_per_vcpu": 0.68, "max_watts_per_vcpu": 3.2 },
+    "storage_optimized": { "min_watts_per_vcpu": 0.8, "max_watts_per_vcpu": 3.8 },
+    "burstable": { "min_watts_per_vcpu": 0.5, "max_watts_per_vcpu": 2.4 },
+    "gpu_accelerated": { "min_watts_per_vcpu": 2.5, "max_watts_per_vcpu": 12.0 }
+  },
+  "storage_types": {
+    "ssd": 0.0012,
+    "hdd": 0.00065,
+    "object_storage": 0.0004
+  },
+  "network": {
+    "kwh_per_gb": 0.001
+  },
+  "pue_by_provider": {
+    "aws": 1.135,
+    "azure": 1.185,
+    "gcp": 1.1
+  },
+  "default_assumed_utilization": 0.35
+}

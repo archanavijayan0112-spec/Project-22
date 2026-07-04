@@ -1,0 +1,62 @@
+from uuid import UUID
+
+from pydantic import BaseModel
+
+
+class ResourceEmission(BaseModel):
+    resource_id: UUID
+    resource_name: str
+    resource_type: str
+    region: str
+    energy_kwh: float
+    co2_kg: float
+
+
+class ArchitectureEmissionSummary(BaseModel):
+    architecture_id: UUID
+    architecture_name: str
+    provider: str
+    total_energy_kwh: float
+    total_co2_kg: float
+    equivalent_trees_needed: float
+    equivalent_km_driven: float
+    breakdown: list[ResourceEmission]
+
+
+class RegionSuggestion(BaseModel):
+    region: str
+    grid_intensity_g_per_kwh: float
+    estimated_co2_kg: float
+    co2_reduction_percent: float
+
+
+class RegionSuggestionResponse(BaseModel):
+    architecture_id: UUID
+    current_region: str
+    current_co2_kg: float
+    suggestions: list[RegionSuggestion]
+
+
+class ProviderComparisonEntry(BaseModel):
+    provider: str
+    region: str
+    grid_intensity_g_per_kwh: float
+    estimated_co2_kg: float
+
+
+class ProviderComparisonResponse(BaseModel):
+    architecture_id: UUID
+    comparisons: list[ProviderComparisonEntry]
+    greenest_option: ProviderComparisonEntry
+
+
+class Recommendation(BaseModel):
+    resource_name: str
+    category: str
+    message: str
+    estimated_co2_savings_kg: float
+
+
+class RecommendationResponse(BaseModel):
+    architecture_id: UUID
+    recommendations: list[Recommendation]

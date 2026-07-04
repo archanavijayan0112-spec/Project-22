@@ -1,0 +1,35 @@
+import React from "react";
+
+const TABS = [
+  { id: "upload", label: "Upload" },
+  { id: "dashboard", label: "Dashboard" },
+  { id: "regions", label: "Regions" },
+  { id: "compare", label: "Compare" },
+  { id: "recommendations", label: "Recommendations" },
+];
+
+export default function Navbar({ active, onChange, hasArchitecture }) {
+  return (
+    <header className="navbar">
+      <div className="navbar__brand">
+        <span className="navbar__mark" aria-hidden="true" />
+        <div>
+          <h1 className="navbar__title">Cloud Carbon Footprint Analyzer</h1>
+          <p className="navbar__subtitle">Estimate. Compare. Deploy greener.</p>
+        </div>
+      </div>
+      <nav className="navbar__tabs">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            className={`navbar__tab ${active === tab.id ? "navbar__tab--active" : ""}`}
+            onClick={() => onChange(tab.id)}
+            disabled={tab.id !== "upload" && !hasArchitecture}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+    </header>
+  );
+}
